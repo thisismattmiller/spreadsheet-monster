@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <title>Canvas Feedback</title>
+  <style>
+  	body{
+  		padding: 0;
+  		margin: 0;
+  		height: 100%;
+  	}
+  	img{
+  		position: absolute;
+  		top: 0px;
+  		left: 0px;
+  		width: auto;
+  		height: 90vh;
+  		overflow: hidden;
+  	}
+
+	* {
+	  margin: 0px;
+	  padding: 0px;
+	}
+
+
+
+	.box {
+	  width: 300px;
+	  background: #424242;
+	  padding: 20px;
+	  text-align: center;
+	  font-weight: 900;
+	  color: #fff;
+	  font-family: arial;
+	  position: absolute;
+		top: 20vh;
+		left: 25vw;
+
+	}
+
+	.sb1:before {
+	  content: "";
+	  width: 0px;
+	  height: 0px;
+	  position: absolute;
+	  border-left: 10px solid #424242;
+	  border-right: 10px solid transparent;
+	  border-top: 10px solid #424242;
+	  border-bottom: 10px solid transparent;
+	  right: -19px;
+	  top: 6px;
+	}
+
+	.sb2:before {
+	  content: "";
+	  width: 0px;
+	  height: 0px;
+	  position: absolute;
+	  border-left: 10px solid transparent;
+	  border-right: 10px solid #424242;
+	  border-top: 10px solid #424242;
+	  border-bottom: 10px solid transparent;
+	  left: -19px;
+	  top: 6px;
+	}
+
+	.sb3:before {
+	  content: "";
+	  width: 0px;
+	  height: 0px;
+	  position: absolute;
+	  border-left: 10px solid #424242;
+	  border-right: 10px solid transparent;
+	  border-top: 10px solid #424242;
+	  border-bottom: 10px solid transparent;
+	  left: 19px;
+	  bottom: -19px;
+	}
+
+	.sb4:before {
+	  content: "";
+	  width: 0px;
+	  height: 0px;
+	  position: absolute;
+	  border-left: 10px solid transparent;
+	  border-right: 10px solid #424242;
+	  border-top: 10px solid #424242;
+	  border-bottom: 10px solid transparent;
+	  right: 19px;
+	  bottom: -19px;
+	}
+	#make-link{
+		position: absolute;
+		right: 5px;
+		bottom: 0;
+	}
+
+  </style>
+</head>
+<body>
+<canvas id="canvas" style="height: 100%; width: 100%;"></canvas>
+
+<img src="img/monster.png">
+
+<div class="box sb2" id="text-box">
+	<span id="text-box-content"></span>
+	<a href="#" id="make-link">🗣</a>
+</div>
+
+<script src="src/canvas-feedback.js"></script>
+<script>
+  launch('src/yoob/', 'container', {
+      'imgUrl': 'img/ss1.jpg'
+  });
+	document.getElementById("make-link").addEventListener("click", function(e){
+
+		value = prompt("What should it say?");
+
+		if (value){
+			var b = btoa(value).replace(/=/g,'');
+
+			var url = window.location.href.split('#')[0] + '#' + b;
+			window.location.href = url;
+			location.reload();
+
+		}
+		e.preventDefault();
+		return false;
+	})
+
+  var text = "Hi fren :)"
+  if (window.location.href.search("#")>-1){
+  	text = atob(window.location.href.split('#')[1])
+
+
+  
+
+  }
+
+  document.getElementById("text-box-content").textContent = text
+
+
+</script>
+
+
+</body>
